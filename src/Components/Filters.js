@@ -49,6 +49,7 @@ export default function CustomizedMenus() {
 
     return (
         <div className="container">
+
             <Button variant="outlined"
                 color="secondary"
                 class="button"
@@ -56,7 +57,7 @@ export default function CustomizedMenus() {
                 aria-haspopup="true"
                 onClick={handleClick}>
                 Ratings
-                </Button>
+            </Button>
 
             <StyledMenu
                 id="customized-menu"
@@ -67,26 +68,61 @@ export default function CustomizedMenus() {
             >
 
                 <StyledMenuItem>
-                    <ListItemText primary="1 Star" />
+                    <ListItemText secondary="1 Star" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="2 Stars" />
+                    <ListItemText secondary="2 Stars" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="3 Stars" />
+                    <ListItemText secondary="3 Stars" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="4 Stars" />
+                    <ListItemText secondary="4 Stars" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="5 Stars" />
+                    <ListItemText secondary="5 Stars" />
                 </StyledMenuItem>
 
             </StyledMenu>
+
+            <Button variant="outlined"
+                color="secondary"
+                class="button"
+                aria-controls="customized-price"
+                aria-haspopup="true"
+                onClick={handleClick}>
+                Price
+
+            <StyledMenu
+                id="customized-price"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+
+                <StyledMenuItem>
+                    <ListItemText secondary="$" />
+                </StyledMenuItem>
+
+                <StyledMenuItem>
+                    <ListItemText secondary="$$" />
+                </StyledMenuItem>
+
+                <StyledMenuItem>
+                    <ListItemText secondary="$$$" />
+                </StyledMenuItem>
+
+                <StyledMenuItem>
+                    <ListItemText secondary="$$$$" />
+                </StyledMenuItem>
+
+            </StyledMenu>
+            </Button>
 
         </div>
     );
