@@ -49,6 +49,7 @@ export default function CustomizedMenus() {
 
     return (
         <div className="container">
+
             <Button variant="outlined"
                 color="secondary"
                 class="button"
@@ -56,7 +57,7 @@ export default function CustomizedMenus() {
                 aria-haspopup="true"
                 onClick={handleClick}>
                 Ratings
-                </Button>
+            </Button>
 
             <StyledMenu
                 id="customized-menu"
@@ -88,6 +89,45 @@ export default function CustomizedMenus() {
 
             </StyledMenu>
 
+            <Button variant="outlined"
+                color="secondary"
+                class="button"
+                aria-controls="customized-price"
+                aria-haspopup="true"
+                onClick={handleClick}>
+                Price
+            </Button>
+
+            <StyledMenu
+                id="customized-price"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+
+                <StyledMenuItem>
+                    <ListItemText primary="$" />
+                </StyledMenuItem>
+
+                <StyledMenuItem>
+                    <ListItemText primary="$$" />
+                </StyledMenuItem>
+
+                <StyledMenuItem>
+                    <ListItemText primary="$$$" />
+                </StyledMenuItem>
+
+                <StyledMenuItem>
+                    <ListItemText primary="$$$$" />
+                </StyledMenuItem>
+
+            </StyledMenu>
+
         </div>
+
+
+
+
     );
 }
