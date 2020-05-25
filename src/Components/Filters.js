@@ -68,23 +68,23 @@ export default function CustomizedMenus() {
             >
 
                 <StyledMenuItem>
-                    <ListItemText primary="1 Star" />
+                    <ListItemText secondary="1 Star" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="2 Stars" />
+                    <ListItemText secondary="2 Stars" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="3 Stars" />
+                    <ListItemText secondary="3 Stars" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="4 Stars" />
+                    <ListItemText secondary="4 Stars" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="5 Stars" />
+                    <ListItemText secondary="5 Stars" />
                 </StyledMenuItem>
 
             </StyledMenu>
@@ -96,7 +96,6 @@ export default function CustomizedMenus() {
                 aria-haspopup="true"
                 onClick={handleClick}>
                 Price
-            </Button>
 
             <StyledMenu
                 id="customized-price"
@@ -107,27 +106,24 @@ export default function CustomizedMenus() {
             >
 
                 <StyledMenuItem>
-                    <ListItemText primary="$" />
+                    <ListItemText secondary="$" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="$$" />
+                    <ListItemText secondary="$$" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="$$$" />
+                    <ListItemText secondary="$$$" />
                 </StyledMenuItem>
 
                 <StyledMenuItem>
-                    <ListItemText primary="$$$$" />
+                    <ListItemText secondary="$$$$" />
                 </StyledMenuItem>
 
             </StyledMenu>
+            </Button>
 
         </div>
-
-
-
-
     );
 }
