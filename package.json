@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.10.0",
+    "@material-ui/lab": "^4.0.0-alpha.54",
     "@material-ui/styles": "^4.10.0",
     "@material/card": "^6.0.0",
     "@testing-library/jest-dom": "^4.2.4",
@@ -15,6 +16,7 @@
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "material-ui-rating": "^4.2.0",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "unirest": "^0.6.0"

@@ -6,7 +6,15 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { CardHeader } from '@material-ui/core';
+import Rating from '@material-ui/lab/Rating';
+import { withStyles } from '@material-ui/core/styles';
 
+
+const StyledRating = withStyles({
+    iconFilled: {
+        color: '#a0a0a0',
+    }
+})(Rating);
 class Restaurant extends React.Component {
     constructor(props) {
         super(props);
@@ -17,7 +25,7 @@ class Restaurant extends React.Component {
                     rating: '5',
                     priceLevel: '1',
                     address: 'The Corner, and others',
-                    hours: '9-5',
+                    hours: '7AM-8PM',
                     isOpen: true,
                 },
                 {
@@ -30,10 +38,10 @@ class Restaurant extends React.Component {
                 },
                 {
                     name: 'Christian\'s Pizza',
-                    rating: '4',
-                    priceLevel: '1',
+                    rating: '4.5',
+                    priceLevel: '3',
                     address: 'The Corner',
-                    hours: '9-5',
+                    hours: '11AM-3AM',
                     isOpen: true,
                 }
             ]
@@ -52,19 +60,26 @@ class Restaurant extends React.Component {
                 return (
                     <div className='main'>
                         <Card className='restaurant'>
-                            <CardHeader title={entry.name} subheader="hello">    </CardHeader>
+                            <CardHeader title={entry.name} subheader={entry.address + ' from ' + entry.hours}> </CardHeader>
                             <CardContent>
-
-                                <Typography className="address" color="textSecondary">
-                                    {entry.address}
-                                </Typography>
+                                <div className="ratings">
+                                    <StyledRating
+                                        name="dolla dolla bills"
+                                        defaultValue={entry.priceLevel}
+                                        icon="$"
+                                        max={4}
+                                        emptyIcon=' '
+                                        readOnly
+                                    />
+                                    <Rating name="read-only" value={entry.rating} precision={0.1} readOnly />
+                                </div>
                             </CardContent>
                             <CardActions>
-                                <Button size="small">Visit Their Site</Button>
+                                <Button size="small" href="https://www.poptropica.com/">Visit Their Site</Button>
                             </CardActions>
 
                         </Card>
-                    </div>
+                    </div >
                 );
             })
         );
