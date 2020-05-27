@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import Restaurants from './Components/Restaurants.js';
 import InputBar from './Components/InputBar.js';
+import Filters from './Components/Filters.js';
 
 require('dotenv').config();
 const api_key = process.env.REACT_APP_API_KEY
@@ -80,6 +81,7 @@ class App extends React.Component {
         <div>hi</div>
         <InputBar location={this.state.location} editLocation={this.editLocation} />
         <Restaurants restuarantList={this.state.restaurantList} />
+        <Filters />
       </div>
     )
   }
