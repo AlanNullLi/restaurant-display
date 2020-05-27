@@ -1,5 +1,11 @@
 import React from 'react';
 import "./Restaurants.css";
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { CardHeader } from '@material-ui/core';
 
 class Restaurant extends React.Component {
     constructor(props) {
@@ -10,9 +16,9 @@ class Restaurant extends React.Component {
                     name: 'Bodos',
                     rating: '5',
                     priceLevel: '1',
-                    address: 'The Corner',
+                    address: 'The Corner, and others',
                     hours: '9-5',
-                    isOpen: false,
+                    isOpen: true,
                 },
                 {
                     name: 'Roots',
@@ -28,7 +34,7 @@ class Restaurant extends React.Component {
                     priceLevel: '1',
                     address: 'The Corner',
                     hours: '9-5',
-                    isOpen: false,
+                    isOpen: true,
                 }
             ]
 
@@ -37,20 +43,32 @@ class Restaurant extends React.Component {
 
 
     render() {
-        return (null)
-        // this.state.dummyRestaurants.slice(0).map((entry) => {
-        //     return (
-        //         <div className='main'>
-        //             <p>Restaurant List Here</p>
-        //             <div class="mdc-card">
-        //                 <div class="mdc-card__media-content"> {entry.name} </div>
-        //             </div>
-        //         </div>
-        //     );
-        // })
+        let returnableRestaurants = this.state.dummyRestaurants.filter(function (e) {
+            return e.isOpen;
+        });
+        return (
 
+            returnableRestaurants.slice(0).map((entry) => {
+                return (
+                    <div className='main'>
+                        <Card className='restaurant'>
+                            <CardHeader title={entry.name} subheader="hello">    </CardHeader>
+                            <CardContent>
+
+                                <Typography className="address" color="textSecondary">
+                                    {entry.address}
+                                </Typography>
+                            </CardContent>
+                            <CardActions>
+                                <Button size="small">Visit Their Site</Button>
+                            </CardActions>
+
+                        </Card>
+                    </div>
+                );
+            })
+        );
     }
-
 }
 
 export default Restaurant;
