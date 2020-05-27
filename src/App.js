@@ -3,7 +3,9 @@ import './App.css';
 import axios from 'axios';
 import Restaurants from './Components/Restaurants.js';
 import InputBar from './Components/InputBar.js';
-import './.env'
+
+require('dotenv').config();
+const api_key = process.env.REACT_APP_API_KEY
 
 class App extends React.Component {
   constructor(props) {
@@ -12,37 +14,33 @@ class App extends React.Component {
       location: '',
       restaurantList: [],
     }
-    this.editLocation = this.editLocation.bind(this);
+    this.updateRestaurants = this.updateRestaurants.bind(this);
   }
-
-  editLocation() {
-
-  }
-
-
 
   //should run this when enter is clicked in inputbar
   //pass in lat and lng fields
   //radius is in meters
   //location is the address but in lat lng
   //can enter address into keyword too if no need for search food functionality
-  getList(radi, lat, lng, category, query) {
+  //needs a min price and max for filtering
+  getList(category, input, min, max, lat, lng, radi) {
     const linkHead = 'https://maps.googleapis.com/maps/api/place/textsearch/json?'
+    const type = '&type=' + category.toString()
+    const query = '&query=' + input.toString()
+    const minPrice = '&minprice=' + min.toString()
+    const maxPrice = '&maxprice=' + max.toString()
     const location = 'location=' + lat.toString() + ',' + lng.toString()
     const radius = '&radius=' + radi.toString()
-    const type = '&type=' + category.toString()
-    const keyword = '&keyword=' + query.toString()
-    // const rankby = '&rankby=distance'
-    const key = '&opennow&key=' + process.env
-    const url = linkHead + location + radius + type + keyword + key;
+    const key = '&opennow&key=' + api_key
+    const url = linkHead + type + query + minPrice + maxPrice + location + radius + key;
     axios
       .get(
         url
       )
       .then(response => {
         const responseList = response.data.results
-        console.log(responseList[0])
         //can make i results.length if want all of them
+        let list = []
         for (let i = 0; i < 10; i++) {
           const place = responseList[i];
           const restaurant = {
@@ -52,26 +50,31 @@ class App extends React.Component {
             coords: place.geometry.location,
             hours: place.opening_hours,
             rating: place.rating,
-            // reviews: place.reviews, will need to add to url too
             price: place.price_level,
-            // phone: place.formatted_phone_number,
-            // website: place.website,
             photos: place.photos,
           }
           console.log(restaurant)
-          // this.setState(prevState => ({
-          //   restaurantList: [...prevState.restaurantList, restaurant]
-          // }))
+          list.push(restaurant)
         }
+        console.log(list)
+        return list
       })
-    // .catch(error => {
-    //   console.log('error')
-    // })
+      .catch(error => {
+        console.log('error')
+      })
+  }
+  updateRestaurants(category, input, min, max, lat, lng, radi) {
+    this.setState({
+      restaurantList: this.getList(category, input, min, max, lat, lng, radi)
+    })
+  }
+
+  componentDidMount() {
+    this.updateRestaurants('restaurant', 'food charlottesville', 0, 4, 38.0336, -78.5080, 2000);
   }
 
 
   render() {
-    this.getList(2000, 38.0293, -78.4767, 'restaurant', 'food');
     return (
       <div>
         <div>hi</div>
