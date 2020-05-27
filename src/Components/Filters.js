@@ -1,129 +1,127 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Menu, Dropdown, Button } from 'antd';
+import './Filter.css'
 
-const StyledMenu = withStyles({
-    paper: {
-        border: '1px solid #d3d4d5',
-    },
-})((props) => (
-    <Menu
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-        }}
-        transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-        }}
-        {...props}
-    />
-));
 
-const StyledMenuItem = withStyles((theme) => ({
-    root: {
-        '&:focus': {
-            backgroundColor: theme.palette.primary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
-        },
-    },
-}))(MenuItem);
+class Filters extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            longitude: null,
+            latitude: null,
+            userAddress: null
+        }
 
-export default function CustomizedMenus() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+        this.getLocation = this.getLocation.bind(this)
+        this.getCoordinates = this.getCoordinates.bind(this)
+    }
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+    getLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
+          } else {
+            alert("Geolocation is not supported by this browser.");
+          }
+    }
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+    getCoordinates = (position, ) => {
+        console.log("hi");
+        console.log(position);
+        this.setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        })
+    }
 
-    return (
-        <div className="container">
+    handleLocationError = (error) => {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+              alert("User denied the request for Geolocation.");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              alert("Location information is unavailable.");
+              break;
+            case error.TIMEOUT:
+              alert("The request to get user location timed out.");
+              break;
+            case error.UNKNOWN_ERROR:
+              alert("An unknown error occurred.");
+              break;
+          }
+    }
 
-            <Button variant="outlined"
-                color="secondary"
-                class="button"
-                aria-controls="customized-menu"
-                aria-haspopup="true"
-                onClick={handleClick}>
-                Ratings
-            </Button>
+    render(){
 
-            <StyledMenu
-                id="customized-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
+        const rating = (
+            <Menu>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                ★
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                ★★
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+                ★★★
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+                ★★★★
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+                ★★★★★
+                </a>
+              </Menu.Item>
+            </Menu>
+          );
 
-                <StyledMenuItem>
-                    <ListItemText secondary="1 Star" />
-                </StyledMenuItem>
+          const price = (
+            <Menu>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                $
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+                $$
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+                $$$
+                </a>
+              </Menu.Item>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+                $$$$
+                </a>
+              </Menu.Item>
+            </Menu>
+          );
 
-                <StyledMenuItem>
-                    <ListItemText secondary="2 Stars" />
-                </StyledMenuItem>
+ 
+        return(
+            <div classname='FiltersClass'>
+                    <Dropdown overlay={rating} placement="bottomLeft">
+                        <Button>Rating</Button>
+                    </Dropdown>
 
-                <StyledMenuItem>
-                    <ListItemText secondary="3 Stars" />
-                </StyledMenuItem>
-
-                <StyledMenuItem>
-                    <ListItemText secondary="4 Stars" />
-                </StyledMenuItem>
-
-                <StyledMenuItem>
-                    <ListItemText secondary="5 Stars" />
-                </StyledMenuItem>
-
-            </StyledMenu>
-
-            <Button variant="outlined"
-                color="secondary"
-                class="button"
-                aria-controls="customized-price"
-                aria-haspopup="true"
-                onClick={handleClick}>
-                Price
-
-            <StyledMenu
-                id="customized-price"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-
-                <StyledMenuItem>
-                    <ListItemText secondary="$" />
-                </StyledMenuItem>
-
-                <StyledMenuItem>
-                    <ListItemText secondary="$$" />
-                </StyledMenuItem>
-
-                <StyledMenuItem>
-                    <ListItemText secondary="$$$" />
-                </StyledMenuItem>
-
-                <StyledMenuItem>
-                    <ListItemText secondary="$$$$" />
-                </StyledMenuItem>
-
-            </StyledMenu>
-            </Button>
-
-        </div>
-    );
+                    <Dropdown overlay={price} placement="bottomLeft">
+                        <Button>Pricing</Button>
+                    </Dropdown>
+                    <button onClick={this.getLocation}>Get Location</button>
+                    {this.state.latitude} {this.state.longitude}
+            </div>
+        )
+    }
 }
+
+export default Filters;
