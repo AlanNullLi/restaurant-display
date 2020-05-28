@@ -14,48 +14,14 @@ const StyledRating = withStyles({
         color: '#a0a0a0',
     }
 })(Rating);
-class Restaurant extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            dummyRestaurants: [
-                {
-                    name: 'Bodos',
-                    rating: '5',
-                    priceLevel: '1',
-                    address: 'The Corner, and others',
-                    hours: '7AM-8PM',
-                    isOpen: true,
-                },
-                {
-                    name: 'Roots',
-                    rating: '5',
-                    priceLevel: '2',
-                    address: 'The Corner',
-                    hours: '9-5',
-                    isOpen: false,
-                },
-                {
-                    name: 'Christian\'s Pizza',
-                    rating: '4.5',
-                    priceLevel: '3',
-                    address: 'The Corner',
-                    hours: '11AM-3AM',
-                    isOpen: true,
-                }
-            ]
 
-        }
-    }
+const Restaurants = props => {
+    const { returnableRestaurants } = props;
 
 
-    render() {
-        let returnableRestaurants = this.state.dummyRestaurants.filter(function (e) {
-            return e.isOpen;
-        });
-        return (
-
-            returnableRestaurants.slice(0).map((entry) => {
+    return (
+        <div>
+            {returnableRestaurants.slice(0).map((entry) => {
                 return (
                     <div className='main'>
                         <Card className='restaurant'>
@@ -64,7 +30,7 @@ class Restaurant extends React.Component {
                                 <div className="ratings">
                                     <StyledRating
                                         name="dolla dolla bills"
-                                        defaultValue={entry.priceLevel}
+                                        defaultValue={entry.price}
                                         icon="$"
                                         max={4}
                                         emptyIcon=' '
@@ -81,8 +47,10 @@ class Restaurant extends React.Component {
                     </div >
                 );
             })
-        );
-    }
+            }
+        </div>
+    );
+
 }
 
-export default Restaurant;
+export default Restaurants;
