@@ -3,6 +3,8 @@ import './App.css';
 import axios from 'axios';
 import Restaurants from './Components/Restaurants.js';
 import InputBar from './Components/InputBar.js';
+import Filters from './Components/Filters.js';
+import LeafMap from './Components/LeafMap.js';
 
 require('dotenv').config();
 const api_key = process.env.REACT_APP_API_KEY
@@ -12,7 +14,18 @@ class App extends React.Component {
     super(props);
     this.state = {
       location: '',
-      restaurantList: [],
+      restaurantList: [
+        {
+          name: 'Roots',
+          address: '123 Main St',
+          coords: {
+            lat: 38.0336,
+            lng: -78.5080,
+          },
+          rating: 5,
+          price: 3,
+        }
+      ],
     }
     this.updateRestaurants = this.updateRestaurants.bind(this);
   }
@@ -23,16 +36,17 @@ class App extends React.Component {
   //location is the address but in lat lng
   //can enter address into keyword too if no need for search food functionality
   //needs a min price and max for filtering
-  getList(category, input, min, max, lat, lng, radi) {
+
+  getList(input, lat, lng, radi, max) {
     const linkHead = 'https://maps.googleapis.com/maps/api/place/textsearch/json?'
-    const type = '&type=' + category.toString()
+    // const type = '&type=' + category.toString()
     const query = '&query=' + input.toString()
-    const minPrice = '&minprice=' + min.toString()
-    const maxPrice = '&maxprice=' + max.toString()
-    const location = 'location=' + lat.toString() + ',' + lng.toString()
+    // const minPrice = '&minprice=' + min.toString()
+    const location = '&location=' + lat.toString() + ',' + lng.toString()
     const radius = '&radius=' + radi.toString()
+    const maxPrice = '&maxprice=' + max.toString()
     const key = '&opennow&key=' + api_key
-    const url = linkHead + type + query + minPrice + maxPrice + location + radius + key;
+    const url = linkHead + query + location + radius + maxPrice + key;
     axios
       .get(
         url
@@ -63,23 +77,28 @@ class App extends React.Component {
         console.log('error')
       })
   }
-  updateRestaurants(category, input, min, max, lat, lng, radi) {
+  updateRestaurants(input, lat, lng, radi, max) {
     this.setState({
-      restaurantList: this.getList(category, input, min, max, lat, lng, radi)
+      restaurantList: this.getList(input, lat, lng, radi, max)
     })
   }
 
   componentDidMount() {
-    this.updateRestaurants('restaurant', 'food charlottesville', 0, 4, 38.0336, -78.5080, 2000);
+    // this.updateRestaurants('food charlottesville', 38.0336, -78.5080, 5000, 4);
   }
 
 
   render() {
     return (
-      <div>
-        <div>hi</div>
-        <InputBar location={this.state.location} editLocation={this.editLocation} />
-        <Restaurants restuarantList={this.state.restaurantList} />
+      <div className='App'>
+        <div>
+          <InputBar location={this.state.location} editLocation={this.editLocation} />
+          <Restaurants restuarantList={this.state.restaurantList} />
+          <Filters updateRestaurants={this.updateRestaurants} />
+        </div>
+        <div>
+          <LeafMap restaurantList={this.state.restaurantList} />
+        </div>
       </div>
     )
   }
