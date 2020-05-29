@@ -94,7 +94,7 @@ class App extends React.Component {
         <div>
           <InputBar location={this.state.location} editLocation={this.editLocation} />
           <Restaurants restuarantList={this.state.restaurantList} />
-          <Filters updateRestaurants={this.updateRestaurants} />
+          <Filters getUserAddress={this.getUserAddress} updateRestaurants={this.updateRestaurants} />
         </div>
         <div>
           <LeafMap restaurantList={this.state.restaurantList} />
