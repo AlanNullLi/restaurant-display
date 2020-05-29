@@ -13,7 +13,32 @@ class App extends React.Component {
     super(props);
     this.state = {
       location: '',
-      restaurantList: [],
+      restaurantList: [
+        {
+          name: 'Bodos',
+          rating: '5',
+          priceLevel: '1',
+          address: 'The Corner, and others',
+          hours: '7AM-8PM',
+          isOpen: true,
+        },
+        {
+          name: 'Roots',
+          rating: '5',
+          priceLevel: '2',
+          address: 'The Corner',
+          hours: '9-5',
+          isOpen: false,
+        },
+        {
+          name: 'Christian\'s Pizza',
+          rating: '4.5',
+          priceLevel: '3',
+          address: 'The Corner',
+          hours: '11AM-3AM',
+          isOpen: true,
+        }
+      ],
     }
     this.updateRestaurants = this.updateRestaurants.bind(this);
   }
@@ -127,7 +152,6 @@ class App extends React.Component {
     this.updateRestaurants('restaurant', 'food charlottesville', 0, 4, 38.0336, -78.5080, 2000);
   }
 
-
   render() {
     return (
       <div className="mainApp">
@@ -135,6 +159,7 @@ class App extends React.Component {
         <InputBar location={this.state.location} editLocation={this.editLocation} />
         <Restaurants restuarantList={this.state.restaurantList} />
         <Filters userAddress={this.getUserAddress} updateRestaurants={this.updateRestaurants}/>
+
       </div>
     )
   }

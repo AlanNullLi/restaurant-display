@@ -16,43 +16,47 @@ class Filters extends React.Component {
         this.getLocation = this.getLocation.bind(this)
         this.getCoordinates = this.getCoordinates.bind(this)
         this.getUserAddress = this.getUserAddress.bind(this)
+
     }
 
-    getLocation = () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
-          } else {
-            alert("Geolocation is not supported by this browser.");
-          }
+    this.getLocation = this.getLocation.bind(this)
+    this.getCoordinates = this.getCoordinates.bind(this)
+  }
+
+
+  getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.getCoordinates, this.handleLocationError);
+    } else {
+      alert("Geolocation is not supported by this browser.");
     }
+  }
 
-    getCoordinates = (position, ) => {
-        console.log("hi");
-        console.log(position);
-        this.setState({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
-        })
-    } 
+  getCoordinates = (position, ) => {
+    console.log("hi");
+    console.log(position);
+    this.setState({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude
+    })
+  }
 
-    // pass down updateRestaurants as method props
-
-    handleLocationError = (error) => {
-        switch(error.code) {
-            case error.PERMISSION_DENIED:
-              alert("User denied the request for Geolocation.");
-              break;
-            case error.POSITION_UNAVAILABLE:
-              alert("Location information is unavailable.");
-              break;
-            case error.TIMEOUT:
-              alert("The request to get user location timed out.");
-              break;
-            case error.UNKNOWN_ERROR:
-              alert("An unknown error occurred.");
-              break;
-          }
+  handleLocationError = (error) => {
+    switch (error.code) {
+      case error.PERMISSION_DENIED:
+        alert("User denied the request for Geolocation.");
+        break;
+      case error.POSITION_UNAVAILABLE:
+        alert("Location information is unavailable.");
+        break;
+      case error.TIMEOUT:
+        alert("The request to get user location timed out.");
+        break;
+      default:
+        alert("An unknown error occurred.");
+        break;
     }
+  }
 
     getUserAddress = (e) => {
       this.setState({
@@ -67,55 +71,56 @@ class Filters extends React.Component {
               <Menu.Item>
                 <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
                 ★
-                </a>
-              </Menu.Item>
-              <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                ★★
-                </a>
-              </Menu.Item>
-              <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-                ★★★
-                </a>
-              </Menu.Item>
-              <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-                ★★★★
-                </a>
-              </Menu.Item>
-              <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-                ★★★★★
-                </a>
-              </Menu.Item>
-            </Menu>
-          );
 
-          const price = (
-            <Menu>
-              <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-                $
                 </a>
-              </Menu.Item>
-              <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-                $$
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+            ★★
                 </a>
-              </Menu.Item>
-              <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-                $$$
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+            ★★★
                 </a>
-              </Menu.Item>
-              <Menu.Item>
-                <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-                $$$$
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+            ★★★★
                 </a>
-              </Menu.Item>
-            </Menu>
-          );
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+            ★★★★★
+                </a>
+        </Menu.Item>
+      </Menu>
+    );
+
+    const price = (
+      <Menu>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+            $
+                </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+            $$
+                </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+            $$$
+                </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+            $$$$
+                </a>
+        </Menu.Item>
+      </Menu>
+    );
 
  
         return(
@@ -139,6 +144,7 @@ class Filters extends React.Component {
             </div>
         )
     }
+
 }
 
 export default Filters;
