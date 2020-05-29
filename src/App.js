@@ -119,6 +119,8 @@ class App extends React.Component {
     this.setState({
       restaurantList: this.getList(input)
     })
+    console.log('hi');
+    console.log(this.getList(input));
   }
 
   componentDidMount() {
@@ -128,11 +130,11 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="mainApp">
         <div>hi</div>
         <InputBar location={this.state.location} editLocation={this.editLocation} />
         <Restaurants restuarantList={this.state.restaurantList} />
-        <Filters updateRestaurants={this.updateRestaurants} />
+        <Filters userAddress={this.getUserAddress} updateRestaurants={this.updateRestaurants}/>
       </div>
     )
   }

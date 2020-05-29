@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu, Dropdown, Button } from 'antd';
 import './Filter.css'
-import App from '../App.js'
+// import { } from '../App.js'
 
 
 class Filters extends React.Component {
@@ -62,7 +62,6 @@ class Filters extends React.Component {
     }
 
     render(){
-
         const rating = (
             <Menu>
               <Menu.Item>
@@ -120,7 +119,7 @@ class Filters extends React.Component {
 
  
         return(
-            <div classname='FiltersClass'>
+            <div className='FiltersClass'>
                     <Dropdown overlay={rating} placement="bottomLeft">
                         <Button>Rating</Button>
                     </Dropdown>
@@ -133,7 +132,7 @@ class Filters extends React.Component {
                     </input>      
 
                     {/* <button type='submit' onClick={this.getUserAddress}>Submit Location</button> */}
-                    <button type='submit' onClick={() => this.props.updateRestaurants(this.getUserAddress)}>Submit Location</button>
+                    <button type='submit' onClick={() => this.props.updateRestaurants(this.state.userAddress)}>Submit Location</button>
 
                     <button onClick={this.getLocation}>Share Location</button>
                     {this.state.latitude} {this.state.longitude}
