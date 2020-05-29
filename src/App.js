@@ -157,8 +157,8 @@ class App extends React.Component {
       <div className="mainApp">
         <div>hi</div>
         <InputBar location={this.state.location} editLocation={this.editLocation} />
-        <Restaurants restuarantList={this.state.restaurantList} />
-        <Filters userAddress={this.getUserAddress} updateRestaurants={this.updateRestaurants}/>
+        <Restaurants restaurantList={this.state.restaurantList} />
+        <Filters userAddress={this.getUserAddress} updateRestaurants={this.updateRestaurants} />
 
       </div>
     )
