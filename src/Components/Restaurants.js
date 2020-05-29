@@ -15,6 +15,7 @@ const StyledRating = withStyles({
         color: '#a0a0a0',
     }
 })(Rating);
+
 class Restaurant extends React.Component {
     constructor(props) {
         super(props);
@@ -45,22 +46,21 @@ class Restaurant extends React.Component {
                     isOpen: true,
                 }
             ]
-
         }
     }
 
 
     render() {
-        let returnableRestaurants = this.state.dummyRestaurants.filter(function (e) {
-            return e.isOpen;
-        });
+        // let returnableRestaurants = this.props.restaurantList.filter(function (e) {
+        //     return e.isOpen;
+        // });
         return (
 
-            returnableRestaurants.slice(0).map((entry) => {
+            this.props.restaurantList.map((entry) => {
                 return (
                     <div className='main'>
                         <Card className='restaurant'>
-                            <CardHeader title={entry.name} subheader={entry.address + ' from ' + entry.hours}> </CardHeader>
+                            <CardHeader title={entry.name} subheader={entry.address}> </CardHeader>
                             <CardContent>
                                 <div className="ratings">
                                     <StyledRating
