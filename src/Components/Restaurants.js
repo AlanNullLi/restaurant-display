@@ -16,39 +16,38 @@ const StyledRating = withStyles({
 })(Rating);
 
 const Restaurants = props => {
-    const { returnableRestaurants } = props;
-
+    console.log(props.restaurantList);
+    const { restaurantList } = props;
+    console.log(restaurantList);
 
     return (
-        <div>
-            {returnableRestaurants.slice(0).map((entry) => {
-                return (
-                    <div className='main'>
-                        <Card className='restaurant'>
-                            <CardHeader title={entry.name} subheader={entry.address + ' from ' + entry.hours}> </CardHeader>
-                            <CardContent>
-                                <div className="ratings">
-                                    <StyledRating
-                                        name="dolla dolla bills"
-                                        defaultValue={entry.price}
-                                        icon="$"
-                                        max={4}
-                                        emptyIcon=' '
-                                        readOnly
-                                    />
-                                    <Rating name="read-only" value={entry.rating} precision={0.1} readOnly />
-                                </div>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small" href="https://www.poptropica.com/">Visit Their Site</Button>
-                            </CardActions>
+        restaurantList.map((entry) => {
+            return (
+                <div className='printout'>
+                    <Card className='restaurant'>
+                        <CardHeader title={entry.name} subheader={entry.address + ' from ' + entry.hours}> </CardHeader>
+                        <CardContent>
+                            <div className="ratings">
+                                <StyledRating
+                                    name="dolla dolla bills"
+                                    defaultValue={entry.price}
+                                    icon="$"
+                                    max={4}
+                                    emptyIcon=' '
+                                    readOnly
+                                />
+                                <Rating name="read-only" value={parseInt(entry.rating)} precision={0.1} readOnly />
+                            </div>
+                        </CardContent>
+                        <CardActions>
+                            <Button size="small" href="https://www.poptropica.com/">Visit Their Site</Button>
+                        </CardActions>
 
-                        </Card>
-                    </div >
-                );
-            })
-            }
-        </div>
+                    </Card>
+                </div >
+            );
+        })
+
     );
 
 }

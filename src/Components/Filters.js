@@ -109,7 +109,7 @@ class Filters extends React.Component {
 
 
     return (
-      <div classname='FiltersClass'>
+      <div className='FiltersClass'>
         <Dropdown overlay={rating} placement="bottomLeft">
           <Button>Rating</Button>
         </Dropdown>

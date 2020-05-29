@@ -104,7 +104,7 @@ class App extends React.Component {
       <div>
         <div>hi</div>
         <InputBar location={this.state.location} editLocation={this.editLocation} />
-        <Restaurants restuarantList={this.state.restaurantList} />
+        <Restaurants restaurantList={this.state.restaurantList} />
         <Filters />
       </div>
     )
