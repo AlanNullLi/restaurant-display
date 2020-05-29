@@ -49,16 +49,59 @@ class App extends React.Component {
   //location is the address but in lat lng
   //can enter address into keyword too if no need for search food functionality
   //needs a min price and max for filtering
-  getList(category, input, min, max, lat, lng, radi) {
+  // getList(category, input, min, max, lat, lng, radi) {
+  //   const linkHead = 'https://maps.googleapis.com/maps/api/place/textsearch/json?'
+  //   const type = '&type=' + category.toString()
+  //   const query = '&query=' + input.toString()
+  //   const minPrice = '&minprice=' + min.toString()
+  //   const maxPrice = '&maxprice=' + max.toString()
+  //   const location = 'location=' + lat.toString() + ',' + lng.toString()
+  //   const radius = '&radius=' + radi.toString()
+  //   const key = '&opennow&key=' + api_key
+  //   const url = linkHead + type + query + minPrice + maxPrice + location + radius + key;
+  //   axios
+  //     .get(
+  //       url
+  //     )
+  //     .then(response => {
+  //       const responseList = response.data.results
+  //       //can make i results.length if want all of them
+  //       let list = []
+  //       for (let i = 0; i < 10; i++) {
+  //         const place = responseList[i];
+  //         const restaurant = {
+  //           name: place.name,
+  //           address: place.formatted_address,
+  //           //location stored as a pair of coords: "lat" and "lng"
+  //           coords: place.geometry.location,
+  //           hours: place.opening_hours,
+  //           rating: place.rating,
+  //           price: place.price_level,
+  //           photos: place.photos,
+  //         }
+  //         console.log(restaurant)
+  //         list.push(restaurant)
+  //       }
+  //       console.log(list)
+  //       return list
+  //     })
+  //     .catch(error => {
+  //       console.log('error')
+  //     })
+  // }
+
+  getList(input) {
     const linkHead = 'https://maps.googleapis.com/maps/api/place/textsearch/json?'
-    const type = '&type=' + category.toString()
+    // const type = '&type=' + category.toString()
     const query = '&query=' + input.toString()
-    const minPrice = '&minprice=' + min.toString()
-    const maxPrice = '&maxprice=' + max.toString()
-    const location = 'location=' + lat.toString() + ',' + lng.toString()
-    const radius = '&radius=' + radi.toString()
+    // const minPrice = '&minprice=' + min.toString()
+    // const maxPrice = '&maxprice=' + max.toString()
+    // const location = 'location=' + lat.toString() + ',' + lng.toString()
+    // const radius = '&radius=' + radi.toString()
     const key = '&opennow&key=' + api_key
-    const url = linkHead + type + query + minPrice + maxPrice + location + radius + key;
+    // const url = linkHead + type + query + minPrice + maxPrice + location + radius + key;
+    const url = linkHead + query + key;
+
     axios
       .get(
         url
@@ -89,10 +132,20 @@ class App extends React.Component {
         console.log('error')
       })
   }
-  updateRestaurants(category, input, min, max, lat, lng, radi) {
+
+
+  // updateRestaurants(category, input, min, max, lat, lng, radi) {
+  //   this.setState({
+  //     restaurantList: this.getList(category, input, min, max, lat, lng, radi)
+  //   })
+  // }
+
+  updateRestaurants(input) {
     this.setState({
-      restaurantList: this.getList(category, input, min, max, lat, lng, radi)
+      restaurantList: this.getList(input)
     })
+    console.log('hi');
+    console.log(this.getList(input));
   }
 
   componentDidMount() {
@@ -101,11 +154,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="mainApp">
         <div>hi</div>
         <InputBar location={this.state.location} editLocation={this.editLocation} />
-        <Restaurants restaurantList={this.state.restaurantList} />
-        <Filters />
+        <Restaurants restuarantList={this.state.restaurantList} />
+        <Filters userAddress={this.getUserAddress} updateRestaurants={this.updateRestaurants}/>
+
       </div>
     )
   }

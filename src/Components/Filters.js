@@ -1,20 +1,28 @@
 import React from 'react';
 import { Menu, Dropdown, Button } from 'antd';
 import './Filter.css'
+// import { } from '../App.js'
 
 
 class Filters extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      longitude: null,
-      latitude: null,
-      userAddress: null
+    constructor(props){
+        super(props);
+        this.state = {
+            longitude: null,
+            latitude: null,
+            userAddress: null
+        }
+
+        this.getLocation = this.getLocation.bind(this)
+        this.getCoordinates = this.getCoordinates.bind(this)
+        this.getUserAddress = this.getUserAddress.bind(this)
+
     }
 
     this.getLocation = this.getLocation.bind(this)
     this.getCoordinates = this.getCoordinates.bind(this)
   }
+
 
   getLocation = () => {
     if (navigator.geolocation) {
@@ -50,13 +58,20 @@ class Filters extends React.Component {
     }
   }
 
-  render() {
+    getUserAddress = (e) => {
+      this.setState({
+        userAddress: e.target.value
+      })
+      // this.updateRestaurants.props(this.props.userAddress)
+    }
 
-    const rating = (
-      <Menu>
-        <Menu.Item>
-          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-            ★
+    render(){
+        const rating = (
+            <Menu>
+              <Menu.Item>
+                <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+                ★
+
                 </a>
         </Menu.Item>
         <Menu.Item>
@@ -107,21 +122,29 @@ class Filters extends React.Component {
       </Menu>
     );
 
+ 
+        return(
+            <div className='FiltersClass'>
+                    <Dropdown overlay={rating} placement="bottomLeft">
+                        <Button>Rating</Button>
+                    </Dropdown>
 
-    return (
-      <div className='FiltersClass'>
-        <Dropdown overlay={rating} placement="bottomLeft">
-          <Button>Rating</Button>
-        </Dropdown>
+                    <Dropdown overlay={price} placement="bottomLeft">
+                        <Button>Pricing</Button>
+                    </Dropdown>
 
-        <Dropdown overlay={price} placement="bottomLeft">
-          <Button>Pricing</Button>
-        </Dropdown>
-        <button onClick={this.getLocation}>Get Location</button>
-        {this.state.latitude} {this.state.longitude}
-      </div>
-    )
-  }
+                    <input type="text" id="textArea" placeholder="Input Address" value={this.state.userAddress}  onChange={e=>this.getUserAddress(e)}> 
+                    </input>      
+
+                    {/* <button type='submit' onClick={this.getUserAddress}>Submit Location</button> */}
+                    <button type='submit' onClick={() => this.props.updateRestaurants(this.state.userAddress)}>Submit Location</button>
+
+                    <button onClick={this.getLocation}>Share Location</button>
+                    {this.state.latitude} {this.state.longitude}
+            </div>
+        )
+    }
+
 }
 
 export default Filters;
